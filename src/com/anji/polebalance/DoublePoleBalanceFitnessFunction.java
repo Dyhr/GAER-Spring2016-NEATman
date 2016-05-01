@@ -303,12 +303,13 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
     }
 
     public double[] getNetworkInput(Board game) {
-        double[] input = new double[9 * 9 + 1];
+        double[] input = new double[9 * 9 * 2 + 1];
         int p = 0;
 
         for (int x = game.player.pelletX - 4; x <= game.player.pelletX + 4; ++x) {
             for (int y = game.player.pelletY - 4; y <= game.player.pelletY + 4; ++y) {
                 if(x < 0 || y < 0 || x >= 20 || y >= 20) continue;
+                input[p++] = game.state[x][y] ? 1.0 : 0.0;
                 input[p++] = game.pellets[x][y] ? 1.0 : 0.0;
             }
         }
@@ -323,7 +324,7 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
      */
     @Override
     public int getMaxFitnessValue() {
-        return 500*173*2;
+        return 50*173*numTrials;
     }
 
     /**
