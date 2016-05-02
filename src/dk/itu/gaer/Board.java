@@ -339,43 +339,6 @@ public class Board extends JPanel {
         g.fillOval(x * 20 + 28, y * 20 + 28, 4, 4);
     }
 
-    public void step() {
-        player.move();
-
-        /* Also move the ghosts, and update the pellet states */
-        ghost1.move();
-        ghost2.move();
-        ghost3.move();
-        ghost4.move();
-        player.updatePellet();
-        ghost1.updatePellet();
-        ghost2.updatePellet();
-        ghost3.updatePellet();
-        ghost4.updatePellet();
-
-        if (pellets[player.pelletX][player.pelletY] && New != 2 && New != 3) {
-            lastPelletEatenX = player.pelletX;
-            lastPelletEatenY = player.pelletY;
-
-            /* Increment pellets eaten value to track for end game */
-            player.pelletsEaten++;
-
-            /* Delete the pellet*/
-            pellets[player.pelletX][player.pelletY] = false;
-
-            /* Increment the score */
-            currScore += 50;
-
-            /* If this was the last pellet */
-            if (player.pelletsEaten == 173) {
-                if (currScore > highScore) {
-                    updateScore(currScore);
-                }
-                winScreen = true;
-            }
-        }
-    }
-
     /* This is the main function that draws one entire frame of the game */
     public void paint(Graphics g) {
         /* If we're playing the dying animation, don't update the entire screen.

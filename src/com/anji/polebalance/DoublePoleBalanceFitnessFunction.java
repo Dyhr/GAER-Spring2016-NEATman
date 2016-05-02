@@ -246,27 +246,8 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
     }
 
     private int singleTrial(Activator activator) {
-        Board game;
-        Pacman pacman = null;
-        if (showGame) {
-            pacman = new Pacman(true);
-            game = pacman.b;
-            pacman.stepFrame(true);
-        } else {
-            game = new Board();
-
-            game.titleScreen = false;
-            game.reset();
-            game.currScore = 0;
-            /* Send the game map to player and all ghosts */
-            game.player.updateState(game.state);
-            /* Don't let the player go in the ghost box*/
-            game.player.state[9][7] = false;
-            game.ghost1.updateState(game.state);
-            game.ghost2.updateState(game.state);
-            game.ghost3.updateState(game.state);
-            game.ghost4.updateState(game.state);
-        }
+        Pacman pacman =  new Pacman(true, showGame);
+        Board game = pacman.b;
         int fitness = 0;
 
         // Run the pole-balancing simulation.
@@ -303,16 +284,14 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
                     throw new RuntimeException("This shouldn't happen");
             }
 
-            if (showGame) {
-                pacman.stepFrame(false);
+            pacman.stepFrame(false);
+            if(showGame){
                 game.repaint(0, 0, 600, 600);
                 try {
                     Thread.sleep(60);
                 } catch (InterruptedException ex) {
                     java.util.logging.Logger.getLogger(DoublePoleBalanceFitnessFunction.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
-                game.step();
             }
             fitness = game.currScore;
 

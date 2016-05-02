@@ -21,14 +21,17 @@ public class Pacman extends JApplet implements MouseListener, KeyListener {
     public Board b = new Board();
 
     private boolean ai = false;
+    private boolean shown = false;
 
     /* This timer is used to do request new frames be drawn*/
     javax.swing.Timer frameTimer;
 
 
     /* This constructor creates the entire game essentially */
-    public Pacman(boolean ai) {
+    public Pacman(boolean ai, boolean shown) {
         this.ai = ai;
+        this.shown = shown;
+        
         b.requestFocus();
         //b.reset();
 
@@ -39,13 +42,15 @@ public class Pacman extends JApplet implements MouseListener, KeyListener {
         /* Add the board to the frame */
         f.add(b, BorderLayout.CENTER);
 
+        /* Make frame visible, disable resizing */
+        if(shown){
+            f.setVisible(true);
+            f.setResizable(false);
+        }
+        
         /*Set listeners for mouse actions and button clicks*/
         b.addMouseListener(this);
         b.addKeyListener(this);
-
-        /* Make frame visible, disable resizing */
-        f.setVisible(true);
-        f.setResizable(false);
 
         /* Set the New flag to 1 because this is a new game */
         b.New = 1;
@@ -284,6 +289,6 @@ public class Pacman extends JApplet implements MouseListener, KeyListener {
 
     /* Main function simply creates a new pacman instance*/
     public static void main(String[] args) {
-        Pacman c = new Pacman(false);
+        Pacman c = new Pacman(false, true);
     }
 }
