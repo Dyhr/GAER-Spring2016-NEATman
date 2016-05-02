@@ -321,8 +321,6 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
                 break;
             }
         }
-        
-        System.out.println("DONE?");
 
         logger.debug("trial took " + currentTimestep + " steps");
         return fitness;
