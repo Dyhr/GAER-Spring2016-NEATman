@@ -28,3 +28,4 @@ dist/
 nbdist/
 nbactions.xml
 .nb-gradle/
+/NEATman/nbproject/private/
