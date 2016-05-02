@@ -38,6 +38,7 @@ import com.anji.util.Randomizer;
 import dk.itu.gaer.Board;
 
 import dk.itu.gaer.Pacman;
+import java.util.logging.Level;
 
 /**
  * This code is a port from Colin Green's SharpNEAT pole balancing code, which
@@ -171,6 +172,8 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
 
     private Random rand;
 
+    private boolean showGame = false;
+
     private void setTrackLength(double aTrackLength) {
         trackLength = aTrackLength;
         trackLengthHalfed = trackLength / 2;
@@ -231,6 +234,9 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
             int fitness = 0;
             for (int i = 0; i < numTrials; i++) {
                 fitness += singleTrial(activator);
+                if (showGame) {
+                    break;
+                }
             }
             c.setFitnessValue(fitness);
         } catch (Throwable e) {
@@ -240,20 +246,28 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
     }
 
     private int singleTrial(Activator activator) {
-        Board game = new Board();
-        int fitness = 0;
+        Board game;
+        Pacman pacman = null;
+        if (showGame) {
+            pacman = new Pacman(true);
+            game = pacman.b;
+            pacman.stepFrame(true);
+        } else {
+            game = new Board();
 
-        game.titleScreen = false;
-        game.reset();
-        game.currScore = 0;
-        /* Send the game map to player and all ghosts */
-        game.player.updateState(game.state);
-        /* Don't let the player go in the ghost box*/
-        game.player.state[9][7] = false;
-        game.ghost1.updateState(game.state);
-        game.ghost2.updateState(game.state);
-        game.ghost3.updateState(game.state);
-        game.ghost4.updateState(game.state);
+            game.titleScreen = false;
+            game.reset();
+            game.currScore = 0;
+            /* Send the game map to player and all ghosts */
+            game.player.updateState(game.state);
+            /* Don't let the player go in the ghost box*/
+            game.player.state[9][7] = false;
+            game.ghost1.updateState(game.state);
+            game.ghost2.updateState(game.state);
+            game.ghost3.updateState(game.state);
+            game.ghost4.updateState(game.state);
+        }
+        int fitness = 0;
 
         // Run the pole-balancing simulation.
         int currentTimestep = 0;
@@ -289,7 +303,17 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
                     throw new RuntimeException("This shouldn't happen");
             }
 
-            game.step();
+            if (showGame) {
+                pacman.stepFrame(false);
+                game.repaint(0, 0, 600, 600);
+                try {
+                    Thread.sleep(60);
+                } catch (InterruptedException ex) {
+                    java.util.logging.Logger.getLogger(DoublePoleBalanceFitnessFunction.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                game.step();
+            }
             fitness = game.currScore;
 
             //System.out.println(game.currScore);
@@ -297,6 +321,8 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
                 break;
             }
         }
+        
+        System.out.println("DONE?");
 
         logger.debug("trial took " + currentTimestep + " steps");
         return fitness;
@@ -305,15 +331,21 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
     public double[] getNetworkInput(Board game) {
         double[] input = new double[9 * 9 * 2 + 1];
         int p = 0;
+        if (game == null || game.state == null || game.pellets == null) {
+            return input;
+            //throw new RuntimeException("Game is not initialized");
+        }
 
         for (int x = game.player.pelletX - 4; x <= game.player.pelletX + 4; ++x) {
             for (int y = game.player.pelletY - 4; y <= game.player.pelletY + 4; ++y) {
-                if(x < 0 || y < 0 || x >= 20 || y >= 20) continue;
+                if (x < 0 || y < 0 || x >= 20 || y >= 20) {
+                    continue;
+                }
                 input[p++] = game.state[x][y] ? 1.0 : 0.0;
                 input[p++] = game.pellets[x][y] ? 1.0 : 0.0;
             }
         }
-        
+
         input[p] = 1.0;
 
         return input;
@@ -324,15 +356,13 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
      */
     @Override
     public int getMaxFitnessValue() {
-        return 50*173*numTrials;
+        return 50 * 173 * numTrials;
     }
 
     /**
      * enable GUI display of pole balancing
      */
     public void enableDisplay() {
-        display = new PoleBalanceDisplay(trackLength, new double[]{poleLength1, poleLength2},
-                maxTimesteps);
-        display.setVisible(true);
+        showGame = true;
     }
 }

@@ -17,7 +17,6 @@
  * 
  * created by Philip Tucker on Jul 23, 2004
  */
-
 package com.anji.polebalance;
 
 import org.apache.log4j.Logger;
@@ -27,30 +26,33 @@ import org.jgap.Configuration;
 import com.anji.persistence.Persistence;
 import com.anji.util.DummyConfiguration;
 import com.anji.util.Properties;
+import java.util.Scanner;
 
 /**
  * @author Philip Tucker
  */
 public class DoublePoleBalanceEvaluator {
 
-private static final Logger logger = Logger.getLogger( DoublePoleBalanceEvaluator.class );
+    private static final Logger logger = Logger.getLogger(DoublePoleBalanceEvaluator.class);
 
-/**
- * @param args
- * @throws Exception
- */
-public static void main( String[] args ) throws Exception {
-	DoublePoleBalanceFitnessFunction ff = new DoublePoleBalanceFitnessFunction();
-	Properties props = new Properties();
-	props.loadFromResource( "properties/dpbalance.properties" );
-	ff.init( props );
-	Persistence db = (Persistence) props.newObjectProperty( Persistence.PERSISTENCE_CLASS_KEY );
-	Configuration config = new DummyConfiguration();
-	Chromosome chrom = db.loadChromosome( "2457", config );
-	if ( chrom == null )
-		throw new IllegalArgumentException( "no chromosome found: " + args[ 1 ] );
-	ff.enableDisplay();
-	ff.evaluate( chrom );
-	logger.info( "Fitness = " + chrom.getFitnessValue() );
-}
+    /**
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        DoublePoleBalanceFitnessFunction ff = new DoublePoleBalanceFitnessFunction();
+        Properties props = new Properties();
+        props.loadFromResource("properties/dpbalance.properties");
+        ff.init(props);
+        Persistence db = (Persistence) props.newObjectProperty(Persistence.PERSISTENCE_CLASS_KEY);
+        Configuration config = new DummyConfiguration();
+        //String champ = new Scanner(System.in).next();
+        Chromosome chrom = db.loadChromosome("1034235", config);
+        if (chrom == null) {
+            throw new IllegalArgumentException("no chromosome found: " + "420326");
+        }
+        ff.enableDisplay();
+        ff.evaluate(chrom);
+        logger.info("Fitness = " + chrom.getFitnessValue());
+    }
 }
