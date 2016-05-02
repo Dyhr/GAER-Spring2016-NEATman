@@ -19,3 +19,7 @@ db/*
 hs_err_pid*
 /build/
 /dist/
+
+# NetBeans #
+private.properties
+private.xml
