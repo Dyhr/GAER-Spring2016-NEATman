@@ -247,14 +247,13 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
 
     private int singleTrial(Activator activator) {
         Pacman pacman = new Pacman(true, showGame);
-        Board game = pacman.b;
         int fitness = 0;
 
         // Run the pole-balancing simulation.
         int currentTimestep = 0;
         for (currentTimestep = 0; currentTimestep < maxTimesteps; currentTimestep++) {
             // Network activation values
-            double[] networkInput = getNetworkInput(game);
+            double[] networkInput = getNetworkInput(pacman.b);
 
             // Activate the network.
             double[] networkOutput = activator.next(networkInput);
@@ -269,16 +268,16 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
             }
             switch (maxI) {
                 case 0:
-                    game.player.desiredDirection = 'L';
+                    pacman.b.player.desiredDirection = 'L';
                     break;
                 case 1:
-                    game.player.desiredDirection = 'R';
+                    pacman.b.player.desiredDirection = 'U';
                     break;
                 case 2:
-                    game.player.desiredDirection = 'U';
+                    pacman.b.player.desiredDirection = 'R';
                     break;
                 case 3:
-                    game.player.desiredDirection = 'D';
+                    pacman.b.player.desiredDirection = 'D';
                     break;
                 default:
                     throw new RuntimeException("This shouldn't happen");
@@ -286,21 +285,26 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
 
             pacman.stepFrame(false);
             if (showGame) {
-                game.repaint(0, 0, 600, 600);
+                pacman.b.repaint(0, 0, 600, 600);
                 try {
                     Thread.sleep(60);
                 } catch (InterruptedException ex) {
                     java.util.logging.Logger.getLogger(DoublePoleBalanceFitnessFunction.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } else {
+                pacman.b.paint(null);
             }
-            fitness = game.currScore;
+            fitness = pacman.b.currScore;
 
             //System.out.println(game.currScore);
-            if (game.stopped || game.winScreen || game.overScreen || game.titleScreen) {
+            if (pacman.b.stopped || pacman.b.winScreen || pacman.b.overScreen || pacman.b.titleScreen) {
                 break;
             }
         }
 
+        pacman.stop();
+        pacman.destroy();
+        
         logger.debug("trial took " + currentTimestep + " steps");
         return fitness;
     }
