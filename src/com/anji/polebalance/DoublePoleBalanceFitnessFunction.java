@@ -38,6 +38,7 @@ import com.anji.util.Randomizer;
 import dk.itu.gaer.Board;
 
 import dk.itu.gaer.Pacman;
+import java.util.HashSet;
 import java.util.logging.Level;
 
 /**
@@ -247,7 +248,9 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
 
     private int singleTrial(Activator activator) {
         Pacman pacman = new Pacman(true, showGame);
+        HashSet<String> history = new HashSet<>();
         int fitness = 0;
+        int stuckCounter = 100;
 
         // Run the pole-balancing simulation.
         int currentTimestep = 0;
@@ -296,15 +299,23 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
             }
             fitness = pacman.b.currScore;
 
+            String pos = pacman.b.player.pelletX + " - " + pacman.b.player.pelletY;
+            if (history.contains(pos)) {
+                stuckCounter--;
+            } else {
+                stuckCounter = 100;
+                history.add(pos);
+            }
+
             //System.out.println(game.currScore);
-            if (pacman.b.stopped || pacman.b.winScreen || pacman.b.overScreen || pacman.b.titleScreen) {
+            if (pacman.b.stopped || pacman.b.winScreen || pacman.b.overScreen || pacman.b.titleScreen || stuckCounter <= 0) {
                 break;
             }
         }
 
         pacman.stop();
         pacman.destroy();
-        
+
         logger.debug("trial took " + currentTimestep + " steps");
         return fitness;
     }

@@ -47,9 +47,9 @@ public class DoublePoleBalanceEvaluator {
         Persistence db = (Persistence) props.newObjectProperty(Persistence.PERSISTENCE_CLASS_KEY);
         Configuration config = new DummyConfiguration();
         //String champ = new Scanner(System.in).next();
-        Chromosome chrom = db.loadChromosome("819", config);
+        Chromosome chrom = db.loadChromosome("1274768", config);
         if (chrom == null) {
-            throw new IllegalArgumentException("no chromosome found: " + "420326");
+            throw new IllegalArgumentException("no chromosome found: " + "454759");
         }
         ff.enableDisplay();
         ff.evaluate(chrom);
