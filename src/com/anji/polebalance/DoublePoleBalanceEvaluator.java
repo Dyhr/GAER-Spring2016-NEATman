@@ -19,7 +19,6 @@
  */
 package com.anji.polebalance;
 
-import org.apache.log4j.Logger;
 import org.jgap.Chromosome;
 import org.jgap.Configuration;
 
@@ -33,7 +32,7 @@ import java.util.Scanner;
  */
 public class DoublePoleBalanceEvaluator {
 
-    private static final Logger logger = Logger.getLogger(DoublePoleBalanceEvaluator.class);
+    //private static final Logger logger = Logger.getLogger(DoublePoleBalanceEvaluator.class);
 
     /**
      * @param args
@@ -47,12 +46,12 @@ public class DoublePoleBalanceEvaluator {
         Persistence db = (Persistence) props.newObjectProperty(Persistence.PERSISTENCE_CLASS_KEY);
         Configuration config = new DummyConfiguration();
         //String champ = new Scanner(System.in).next();
-        Chromosome chrom = db.loadChromosome("535897", config);
+        Chromosome chrom = db.loadChromosome("2280", config);
         if (chrom == null) {
             throw new IllegalArgumentException("no chromosome found: " + "454759");
         }
         ff.enableDisplay();
         ff.evaluate(chrom);
-        logger.info("Fitness = " + chrom.getFitnessValue());
+        //logger.info("Fitness = " + chrom.getFitnessValue());
     }
 }

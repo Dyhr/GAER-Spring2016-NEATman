@@ -69,7 +69,7 @@ public void geneticEventFired( GeneticEvent event ) {
 				.getBulkFitnessFunction().getMaxFitnessValue() : config.getFitnessFunction()
 				.getMaxFitnessValue();
 		double fitness = ( maxFitnessValue == 0 ) ? fittest.getFitnessValue() : ( fittest
-				.getFitnessValue() / maxFitnessValue );
+				.getFitnessValue()/* / maxFitnessValue */);
 		logger.info( "species count: " + genotype.getSpecies().size() );
 		List chroms = genotype.getChromosomes();
 		Iterator iter = chroms.iterator();

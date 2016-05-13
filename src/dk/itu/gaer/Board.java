@@ -173,11 +173,47 @@ public class Board extends JPanel {
         pellets[8][8] = false;
         pellets[9][8] = false;
         pellets[10][8] = false;
-
-        /* Send the game map to player and all ghosts */
-        player.updateState(state);
-        /* Don't let the player go in the ghost box*/
-        player.state[9][7] = false;
+        
+        updateMap(120, 120, 60, 20);
+        updateMap(120, 80, 20, 100);
+        updateMap(280, 80, 20, 100);
+        updateMap(240, 120, 60, 20);
+        updateMap(280, 200, 20, 60);
+        updateMap(120, 200, 20, 60);
+        updateMap(160, 240, 100, 20);
+        updateMap(200, 260, 20, 40);
+        updateMap(120, 280, 60, 20);
+        updateMap(240, 280, 60, 20);
+        updateMap(40, 280, 60, 20);
+        updateMap(80, 280, 20, 60);
+        updateMap(320, 280, 60, 20);
+        updateMap(320, 280, 20, 60);
+        updateMap(20, 320, 40, 20);
+        updateMap(360, 320, 40, 20);
+        updateMap(160, 320, 100, 20);
+        updateMap(200, 320, 20, 60);
+        updateMap(40, 360, 140, 20);
+        updateMap(240, 360, 140, 20);
+        updateMap(280, 320, 20, 60);
+        updateMap(120, 320, 20, 60);
+        updateMap(320, 200, 80, 60);
+        updateMap(320, 80, 60, 20);
+        updateMap(200, 80, 20, 60);
+        updateMap(40, 40, 60, 20);
+        updateMap(120, 40, 60, 20);
+        updateMap(200, 20, 20, 40);
+        updateMap(240, 40, 60, 20);
+        updateMap(320, 40, 60, 20);
+        updateMap(40, 80, 60, 20);
+        updateMap(160, 80, 100, 20);
+        updateMap(20, 120, 80, 60);
+        updateMap(320, 120, 80, 60);
+        updateMap(20, 200, 80, 60);
+        updateMap(240, 180, 20, 20);
+        updateMap(160, 200, 100, 20);
+        updateMap(160, 180, 20, 20);
+        updateMap(220, 160, 40, 20);
+        updateMap(160, 160, 40, 20);
     }
 
 
@@ -233,94 +269,54 @@ public class Board extends JPanel {
         g.setColor(Color.BLUE);
 
         g.fillRect(40, 40, 60, 20);
-        updateMap(40, 40, 60, 20);
         g.fillRect(120, 40, 60, 20);
-        updateMap(120, 40, 60, 20);
         g.fillRect(200, 20, 20, 40);
-        updateMap(200, 20, 20, 40);
         g.fillRect(240, 40, 60, 20);
-        updateMap(240, 40, 60, 20);
         g.fillRect(320, 40, 60, 20);
-        updateMap(320, 40, 60, 20);
         g.fillRect(40, 80, 60, 20);
-        updateMap(40, 80, 60, 20);
         g.fillRect(160, 80, 100, 20);
-        updateMap(160, 80, 100, 20);
         g.fillRect(200, 80, 20, 60);
-        updateMap(200, 80, 20, 60);
         g.fillRect(320, 80, 60, 20);
-        updateMap(320, 80, 60, 20);
 
         g.fillRect(20, 120, 80, 60);
-        updateMap(20, 120, 80, 60);
         g.fillRect(320, 120, 80, 60);
-        updateMap(320, 120, 80, 60);
         g.fillRect(20, 200, 80, 60);
-        updateMap(20, 200, 80, 60);
         g.fillRect(320, 200, 80, 60);
-        updateMap(320, 200, 80, 60);
 
         g.fillRect(160, 160, 40, 20);
-        updateMap(160, 160, 40, 20);
         g.fillRect(220, 160, 40, 20);
-        updateMap(220, 160, 40, 20);
         g.fillRect(160, 180, 20, 20);
-        updateMap(160, 180, 20, 20);
         g.fillRect(160, 200, 100, 20);
-        updateMap(160, 200, 100, 20);
         g.fillRect(240, 180, 20, 20);
-        updateMap(240, 180, 20, 20);
         g.setColor(Color.BLUE);
 
         g.fillRect(120, 120, 60, 20);
-        updateMap(120, 120, 60, 20);
         g.fillRect(120, 80, 20, 100);
-        updateMap(120, 80, 20, 100);
         g.fillRect(280, 80, 20, 100);
-        updateMap(280, 80, 20, 100);
         g.fillRect(240, 120, 60, 20);
-        updateMap(240, 120, 60, 20);
 
         g.fillRect(280, 200, 20, 60);
-        updateMap(280, 200, 20, 60);
         g.fillRect(120, 200, 20, 60);
-        updateMap(120, 200, 20, 60);
         g.fillRect(160, 240, 100, 20);
-        updateMap(160, 240, 100, 20);
         g.fillRect(200, 260, 20, 40);
-        updateMap(200, 260, 20, 40);
 
         g.fillRect(120, 280, 60, 20);
-        updateMap(120, 280, 60, 20);
         g.fillRect(240, 280, 60, 20);
-        updateMap(240, 280, 60, 20);
 
         g.fillRect(40, 280, 60, 20);
-        updateMap(40, 280, 60, 20);
         g.fillRect(80, 280, 20, 60);
-        updateMap(80, 280, 20, 60);
         g.fillRect(320, 280, 60, 20);
-        updateMap(320, 280, 60, 20);
         g.fillRect(320, 280, 20, 60);
-        updateMap(320, 280, 20, 60);
 
         g.fillRect(20, 320, 40, 20);
-        updateMap(20, 320, 40, 20);
         g.fillRect(360, 320, 40, 20);
-        updateMap(360, 320, 40, 20);
         g.fillRect(160, 320, 100, 20);
-        updateMap(160, 320, 100, 20);
         g.fillRect(200, 320, 20, 60);
-        updateMap(200, 320, 20, 60);
 
         g.fillRect(40, 360, 140, 20);
-        updateMap(40, 360, 140, 20);
         g.fillRect(240, 360, 140, 20);
-        updateMap(240, 360, 140, 20);
         g.fillRect(280, 320, 20, 40);
-        updateMap(280, 320, 20, 60);
         g.fillRect(120, 320, 20, 60);
-        updateMap(120, 320, 20, 60);
         drawLives(g);
     }
 
