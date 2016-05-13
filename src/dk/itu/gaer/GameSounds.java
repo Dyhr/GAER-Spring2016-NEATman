@@ -24,22 +24,25 @@ public class GameSounds{
         
         try{
             // Pacman eating sound
-            url = this.getClass().getClassLoader().getResource("sounds/nomnom.wav");
-            audioIn = AudioSystem.getAudioInputStream(url);
-            nomNom = AudioSystem.getClip();
-            nomNom.open(audioIn);
+            //url = this.getClass().getClassLoader().getResource("sounds/nomnom.wav");
+            //audioIn = AudioSystem.getAudioInputStream(url);
+            //nomNom = AudioSystem.getClip();
+            //nomNom.open(audioIn);
+            //nomNom.close();
             
             // newGame        
-            url = this.getClass().getClassLoader().getResource("sounds/newGame.wav");
-            audioIn = AudioSystem.getAudioInputStream(url);
-            newGame = AudioSystem.getClip();
-            newGame.open(audioIn);
+            //url = this.getClass().getClassLoader().getResource("sounds/newGame.wav");
+            //audioIn = AudioSystem.getAudioInputStream(url);
+            //newGame = AudioSystem.getClip();
+            //newGame.open(audioIn);
+            //newGame.close();
             
             // death        
-            url = this.getClass().getClassLoader().getResource("sounds/death.wav");
-            audioIn = AudioSystem.getAudioInputStream(url);
-            death = AudioSystem.getClip();
-            death.open(audioIn);
+            //url = this.getClass().getClassLoader().getResource("sounds/death.wav");
+            //audioIn = AudioSystem.getAudioInputStream(url);
+            //death = AudioSystem.getClip();
+            //death.open(audioIn);
+            //death.close();
 
         }catch(Exception e){}
     }
@@ -51,29 +54,29 @@ public class GameSounds{
           return;
 
         stopped=false;
-        nomNom.stop();
-        nomNom.setFramePosition(0);
-        nomNom.loop(Clip.LOOP_CONTINUOUSLY);
+        //nomNom.stop();
+        //nomNom.setFramePosition(0);
+        //nomNom.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     /* Stop pacman eating sound */
     public void nomNomStop(){
         stopped=true;
-        nomNom.stop();
-        nomNom.setFramePosition(0);
+        //nomNom.stop();
+        //nomNom.setFramePosition(0);
     }
     
     /* Play new game sound */
     public void newGame(){
-        newGame.stop();
-        newGame.setFramePosition(0);
-        newGame.start();
+        //newGame.stop();
+        //newGame.setFramePosition(0);
+        //newGame.start();
     }
     
     /* Play pacman death sound */
     public void death(){
-        death.stop();
-        death.setFramePosition(0);
-        death.start();
+        //death.stop();
+        //death.setFramePosition(0);
+        //death.start();
     }
 }

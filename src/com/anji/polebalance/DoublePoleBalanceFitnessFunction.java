@@ -321,15 +321,15 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
     }
 
     public double[] getNetworkInput(Board game) {
-        double[] input = new double[9 * 9 * 2 + 1];
+        double[] input = new double[3 * 3 * 2 + 1];
         int p = 0;
         if (game == null || game.state == null || game.pellets == null) {
             return input;
             //throw new RuntimeException("Game is not initialized");
         }
 
-        for (int x = game.player.pelletX - 4; x <= game.player.pelletX + 4; ++x) {
-            for (int y = game.player.pelletY - 4; y <= game.player.pelletY + 4; ++y) {
+        for (int x = game.player.pelletX - 1; x <= game.player.pelletX + 1; ++x) {
+            for (int y = game.player.pelletY - 1; y <= game.player.pelletY + 1; ++y) {
                 if (x < 0 || y < 0 || x >= 20 || y >= 20) {
                     continue;
                 }
