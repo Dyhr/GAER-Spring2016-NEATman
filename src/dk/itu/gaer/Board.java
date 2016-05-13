@@ -174,6 +174,10 @@ public class Board extends JPanel {
         pellets[9][8] = false;
         pellets[10][8] = false;
 
+        /* Send the game map to player and all ghosts */
+        player.updateState(state);
+        /* Don't let the player go in the ghost box*/
+        player.state[9][7] = false;
     }
 
 
