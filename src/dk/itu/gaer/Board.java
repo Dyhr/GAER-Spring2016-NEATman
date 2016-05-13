@@ -32,22 +32,22 @@ public class Board extends JPanel {
   Image winScreenImage = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/winScreen.jpg"));
      */
  /* For NOT JAR file*/
-    Image pacmanImage = Toolkit.getDefaultToolkit().getImage("img/pacman.jpg");
-    Image pacmanUpImage = Toolkit.getDefaultToolkit().getImage("img/pacmanup.jpg");
-    Image pacmanDownImage = Toolkit.getDefaultToolkit().getImage("img/pacmandown.jpg");
-    Image pacmanLeftImage = Toolkit.getDefaultToolkit().getImage("img/pacmanleft.jpg");
-    Image pacmanRightImage = Toolkit.getDefaultToolkit().getImage("img/pacmanright.jpg");
-    Image ghost10 = Toolkit.getDefaultToolkit().getImage("img/ghost10.jpg");
-    Image ghost20 = Toolkit.getDefaultToolkit().getImage("img/ghost20.jpg");
-    Image ghost30 = Toolkit.getDefaultToolkit().getImage("img/ghost30.jpg");
-    Image ghost40 = Toolkit.getDefaultToolkit().getImage("img/ghost40.jpg");
-    Image ghost11 = Toolkit.getDefaultToolkit().getImage("img/ghost11.jpg");
-    Image ghost21 = Toolkit.getDefaultToolkit().getImage("img/ghost21.jpg");
-    Image ghost31 = Toolkit.getDefaultToolkit().getImage("img/ghost31.jpg");
-    Image ghost41 = Toolkit.getDefaultToolkit().getImage("img/ghost41.jpg");
-    Image titleScreenImage = Toolkit.getDefaultToolkit().getImage("img/titleScreen.jpg");
-    Image gameOverImage = Toolkit.getDefaultToolkit().getImage("img/gameOver.jpg");
-    Image winScreenImage = Toolkit.getDefaultToolkit().getImage("img/winScreen.jpg");
+    static Image pacmanImage = Toolkit.getDefaultToolkit().getImage("img/pacman.jpg");
+    static Image pacmanUpImage = Toolkit.getDefaultToolkit().getImage("img/pacmanup.jpg");
+    static Image pacmanDownImage = Toolkit.getDefaultToolkit().getImage("img/pacmandown.jpg");
+    static Image pacmanLeftImage = Toolkit.getDefaultToolkit().getImage("img/pacmanleft.jpg");
+    static Image pacmanRightImage = Toolkit.getDefaultToolkit().getImage("img/pacmanright.jpg");
+    static Image ghost10 = Toolkit.getDefaultToolkit().getImage("img/ghost10.jpg");
+    static Image ghost20 = Toolkit.getDefaultToolkit().getImage("img/ghost20.jpg");
+    static Image ghost30 = Toolkit.getDefaultToolkit().getImage("img/ghost30.jpg");
+    static Image ghost40 = Toolkit.getDefaultToolkit().getImage("img/ghost40.jpg");
+    static Image ghost11 = Toolkit.getDefaultToolkit().getImage("img/ghost11.jpg");
+    static Image ghost21 = Toolkit.getDefaultToolkit().getImage("img/ghost21.jpg");
+    static Image ghost31 = Toolkit.getDefaultToolkit().getImage("img/ghost31.jpg");
+    static Image ghost41 = Toolkit.getDefaultToolkit().getImage("img/ghost41.jpg");
+    static Image titleScreenImage = Toolkit.getDefaultToolkit().getImage("img/titleScreen.jpg");
+    static Image gameOverImage = Toolkit.getDefaultToolkit().getImage("img/gameOver.jpg");
+    static Image winScreenImage = Toolkit.getDefaultToolkit().getImage("img/winScreen.jpg");
 
     /* Initialize the player and ghosts */
     public Player player = new Player(200, 300);
