@@ -25,15 +25,11 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import com.anji.Copyright;
-import com.anji.imaging.IdentifyImageFitnessFunction;
-import com.anji.imaging.ImageFileFilter;
 import com.anji.neat.NeatConfiguration;
 import com.anji.neat.NeatIdMap;
 import com.anji.persistence.Persistence;
@@ -168,38 +164,6 @@ public void reset() throws IOException {
 		String fileName = (String) it.next();
 		if ( fileName != null && fileName.length() > 0 ) {
 			File f = new File( fileName );
-			if ( f.delete() )
-				System.out.println( "deleted " + f.getAbsolutePath() );
-			else
-				System.err.println( "error deleting " + f.getAbsolutePath() );
-		}
-	}
-
-	// images
-	if ( deleteAll || userResponse( "Delete images?" ) ) {
-		Collection filesToDelete = new ArrayList();
-		try {
-			File matchDir = props.getDirProperty( IdentifyImageFitnessFunction.IMG_MATCH_DIR_KEY );
-			filesToDelete
-					.addAll( Arrays.asList( matchDir.listFiles( ImageFileFilter.getInstance() ) ) );
-		}
-		catch ( Exception e ) {
-			System.err.println( "could not get files for property "
-					+ IdentifyImageFitnessFunction.IMG_MATCH_DIR_KEY );
-		}
-		try {
-			File mismatchDir = props
-					.getDirProperty( IdentifyImageFitnessFunction.IMG_MISMATCH_DIR_KEY );
-			filesToDelete.addAll( Arrays.asList( mismatchDir
-					.listFiles( ImageFileFilter.getInstance() ) ) );
-		}
-		catch ( Exception e ) {
-			System.err.println( "could not get files for property "
-					+ IdentifyImageFitnessFunction.IMG_MISMATCH_DIR_KEY );
-		}
-		it = filesToDelete.iterator();
-		while ( it.hasNext() ) {
-			File f = (File) it.next();
 			if ( f.delete() )
 				System.out.println( "deleted " + f.getAbsolutePath() );
 			else

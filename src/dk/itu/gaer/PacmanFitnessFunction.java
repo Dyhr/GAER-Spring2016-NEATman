@@ -27,7 +27,6 @@ import org.apache.log4j.Logger;
 import org.jgap.BulkFitnessFunction;
 import org.jgap.Chromosome;
 
-import com.anji.imaging.IdentifyImageFitnessFunction;
 import com.anji.integration.Activator;
 import com.anji.integration.ActivatorTranscriber;
 import com.anji.util.Configurable;
