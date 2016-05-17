@@ -1,30 +1,24 @@
-
+NEAT in Pacman
 
 **************
 * To Compile *
 **************
-make
+Use your prefered IDE or javac. Remember to include everything in the lib folder.
+The main project files are:
+The Evolver: 		com.anji.neat.Evolver
+The Evalutator: 	dk.itu.gaer.PacmanEvalutator
+The Game:			dk.itu.gaer.Pacman
 
-**********
-* To Run *
-**********
-java Pacman
+**********************
+* Evolving a network *
+**********************
+Run the com.anji.neat.Evolver class. 
+The pacman.properties file will be loaded if no args are specified.
+pacman.properties contain all changable parameters, such as mutation rates and population size.
 
-**********
-* Output *
-**********
-There is no output.  Just play the game.  Enjoy!
-
-************************
-* Turn into a Jar File *
-************************
-(This isn't for a turn in, this is just to remind me how.  I don't guarantee that this will work
- and certainly don't want this functionality graded :-) )
-First, edit the code to access the images differently (search code for JAR)
-Then, do the following commands
-
-jar cf Pacman.jar *.class img/ sounds/
-Then sign using...
-jarsigner Pacman.jar alias
-(You have to set up jarsigner!)
-
+***************
+* Evalutating *
+***************
+Once a desirable chromosome has been found, change the dk.itu.gaer.PacmanEvalutator source file.
+Insert the Id of the chromosome where specified.
+Recompile and run the dk.itu.gaer.PacmanEvalutator class.

@@ -24,18 +24,22 @@ package com.anji;
  */
 public class Copyright {
 
-/**
- * copyright string
- */
-public final static String STRING = "ANJI v2.0, Copyright (C) 2004 Derek James and Philip Tucker\n"
-		+ "ANJI comes with ABSOLUTELY NO WARRANTY\n"
-		+ "This is free software, and you are welcome to redistribute it\n"
-		+ "under the conditions of the GNU General Public License.";
+    /**
+     * copyright string
+     */
+    public final static String STRING = "ANJI v2.0, Copyright (C) 2004 Derek James and Philip Tucker\n"
+            + "ANJI comes with ABSOLUTELY NO WARRANTY\n"
+            + "This is free software, and you are welcome to redistribute it\n"
+            + "under the conditions of the GNU General Public License.\n"
+            + "\n"
+            + "The Pacman fitness function and evaluator is developed by:\n"
+            + "Maksymilian Marcin Koziol, Stinus Møhl Thomsen and Rasmus Dyhr Larsen\n"
+            + "For the course Artificial Life & Evolutionary Robotics: Theory, Methods and Art, Spring 2016";
 
-/**
- * private ctor
- */
-private Copyright() {
-	super();
-}
+    /**
+     * private ctor
+     */
+    private Copyright() {
+        super();
+    }
 }
