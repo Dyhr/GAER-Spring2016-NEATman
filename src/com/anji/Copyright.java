@@ -32,6 +32,8 @@ public class Copyright {
             + "This is free software, and you are welcome to redistribute it\n"
             + "under the conditions of the GNU General Public License.\n"
             + "\n"
+            + "The Pacman game is developed by Drew Schuster/dtschust on Github\n"
+            + "\n"
             + "The Pacman fitness function and evaluator is developed by:\n"
             + "Maksymilian Marcin Koziol, Stinus Møhl Thomsen and Rasmus Dyhr Larsen\n"
             + "For the course Artificial Life & Evolutionary Robotics: Theory, Methods and Art, Spring 2016";
