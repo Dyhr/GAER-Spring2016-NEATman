@@ -17,7 +17,7 @@
  * 
  * created by Derek James on Jul 5, 2005
  */
-package com.anji.polebalance;
+package dk.itu.gaer;
 
 import java.util.Iterator;
 import java.util.List;
@@ -31,7 +31,6 @@ import org.jgap.Chromosome;
 import com.anji.imaging.IdentifyImageFitnessFunction;
 import com.anji.integration.Activator;
 import com.anji.integration.ActivatorTranscriber;
-import com.anji.util.Arrays;
 import com.anji.util.Configurable;
 import com.anji.util.Properties;
 import com.anji.util.Randomizer;
@@ -47,7 +46,7 @@ import java.util.logging.Level;
  *
  * @author Derek James
  */
-public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Configurable {
+public class PacmanFitnessFunction implements BulkFitnessFunction, Configurable {
 
     private final static String TRACK_LENGTH_KEY = "polebalance.track.length";
 
@@ -129,8 +128,6 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
      */
     private static final double SEVENTYTWO_DEGREES = Math.PI / 2.5;
 
-    private PoleBalanceDisplay display = null;
-
     private final static double DEFAULT_TRACK_LENGTH = 4.8;
 
     private double trackLength = DEFAULT_TRACK_LENGTH;
@@ -147,7 +144,7 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
 
     private double poleAngleThreshold = THIRTYSIX_DEGREES;
 
-    private final static Logger logger = Logger.getLogger(DoublePoleBalanceFitnessFunction.class);
+    private final static Logger logger = Logger.getLogger(PacmanFitnessFunction.class);
 
     private ActivatorTranscriber factory;
 
@@ -292,7 +289,7 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
                 try {
                     Thread.sleep(60);
                 } catch (InterruptedException ex) {
-                    java.util.logging.Logger.getLogger(DoublePoleBalanceFitnessFunction.class.getName()).log(Level.SEVERE, null, ex);
+                    java.util.logging.Logger.getLogger(PacmanFitnessFunction.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 pacman.b.paint(null);
@@ -321,26 +318,27 @@ public class DoublePoleBalanceFitnessFunction implements BulkFitnessFunction, Co
     }
 
     public double[] getNetworkInput(Board game) {
-        double[] input = new double[5 * 5 * 2 + 1];
+        double[] input = new double[5 * 5 * 3 + 1];
         int p = 0;
         if (game == null || game.state == null || game.pellets == null) {
             return input;
             //throw new RuntimeException("Game is not initialized");
         }
 
-        for (int x = game.player.pelletX - 2; x <= game.player.pelletX + 2; ++x) {
-            for (int y = game.player.pelletY - 2; y <= game.player.pelletY + 2; ++y) {
+        for (int x = game.player.pelletX - 1; x <= game.player.pelletX + 1; ++x) {
+            for (int y = game.player.pelletY - 1; y <= game.player.pelletY + 1; ++y) {
                 if (x < 0 || y < 0 || x >= 20 || y >= 20) {
                     continue;
                 }
                 input[p++] = game.state[x][y] ? 1.0 : 0.0;
+                input[p++] = game.pellets[x][y] ? 1.0 : 0.0;
                 if((x == game.ghost1.pelletX && y == game.ghost1.pelletY)
                     ||(x == game.ghost2.pelletX && y == game.ghost2.pelletY)
                     ||(x == game.ghost3.pelletX && y == game.ghost3.pelletY)
                     ||(x == game.ghost4.pelletX && y == game.ghost4.pelletY)){
-                    input[p] = -1.0;
+                    input[p] = 1.0;
                 }
-                input[p++] = game.pellets[x][y] ? 1.0 : 0.0;
+                p++;
             }
         }
 

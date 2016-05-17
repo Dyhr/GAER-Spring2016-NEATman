@@ -17,41 +17,41 @@
  * 
  * created by Philip Tucker on Jul 23, 2004
  */
-package com.anji.polebalance;
+package dk.itu.gaer;
 
+import dk.itu.gaer.PacmanFitnessFunction;
 import org.jgap.Chromosome;
 import org.jgap.Configuration;
 
 import com.anji.persistence.Persistence;
 import com.anji.util.DummyConfiguration;
 import com.anji.util.Properties;
-import java.util.Scanner;
+import org.apache.log4j.Logger;
 
 /**
  * @author Philip Tucker
  */
-public class DoublePoleBalanceEvaluator {
+public class PacmanEvaluator {
 
-    //private static final Logger logger = Logger.getLogger(DoublePoleBalanceEvaluator.class);
+    private static final Logger logger = Logger.getLogger(PacmanEvaluator.class);
 
     /**
      * @param args
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        DoublePoleBalanceFitnessFunction ff = new DoublePoleBalanceFitnessFunction();
+        PacmanFitnessFunction ff = new PacmanFitnessFunction();
         Properties props = new Properties();
-        props.loadFromResource("properties/dpbalance.properties");
+        props.loadFromResource("properties/pacman.properties");
         ff.init(props);
         Persistence db = (Persistence) props.newObjectProperty(Persistence.PERSISTENCE_CLASS_KEY);
         Configuration config = new DummyConfiguration();
-        //String champ = new Scanner(System.in).next();
-        Chromosome chrom = db.loadChromosome("2280", config);
+        Chromosome chrom = db.loadChromosome("442662", config); // INPUT CHROMOSOME HERE
         if (chrom == null) {
-            throw new IllegalArgumentException("no chromosome found: " + "454759");
+            throw new IllegalArgumentException("no chromosome found");
         }
         ff.enableDisplay();
         ff.evaluate(chrom);
-        //logger.info("Fitness = " + chrom.getFitnessValue());
+        logger.info("Fitness = " + chrom.getFitnessValue());
     }
 }

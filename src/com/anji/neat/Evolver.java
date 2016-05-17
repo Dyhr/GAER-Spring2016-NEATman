@@ -249,7 +249,7 @@ public class Evolver implements Configurable {
 
             Properties props;
             if (args.length != 1) {
-                props = new Properties("properties/dpbalance.properties");
+                props = new Properties("properties/pacman.properties");
             } else {
                 props = new Properties(args[0]);
             }
